@@ -39,17 +39,6 @@ stuff = ['Yeet', 'nan', 'pog', 'ur nan', 'e', 'f', 'x']
 for item in stuff:
 	my_list.insert(END, item)
 
-#functions
-def delete_item():
-	my_list.delete(ANCHOR)
-
-def add_item():
-	my_list.insert(END, my_entry.get())
-	my_entry.delete(0, END)
-def cross_off():
-	pass
-def uncross_off():
-	pass
 
 
 
@@ -73,18 +62,66 @@ my_entry.pack(pady=20)
 button_frame = Frame(root)
 button_frame.pack(pady=20)
 
+#functions
+def delete_item(event):
+	my_list.delete(ANCHOR)
+
+def delete_item_button():
+	my_list.delete(ANCHOR)
+
+
+	
+
+def add_item_button():
+	my_list.insert(END, my_entry.get())
+	my_entry.delete(0, END)
+def cross_off():
+	pass
+def uncross_off():
+	pass
+
+	
+def add_item(event):
+	entry_data = (my_entry.get())
+	
+	if not len(entry_data) == 0:
+		add_item_button()
+
+	else:
+		pass
+		
+	
+
+
+root.bind('<Return>', add_item)
+
+
+	
+
+	
+
+
+
+   
+	
+
+
+   
+
+
+root.bind('<BackSpace>', delete_item)
+
 
 #add buttons
-delete_button = Button(button_frame, text="Delete Item", command=delete_item)
-add_button = Button(button_frame, text="Add Item", command=add_item)
-cross_off_button = Button(button_frame, text="Cross Off Item", command=cross_off)
+delete_button = Button(button_frame, text="Delete Item", command=delete_item_button)
+add_button = Button(button_frame, text="Add Item", command=add_item_button)
+cross_off_button = Button(button_frame, text="Cross Item", command=cross_off)
 uncross_off_button = Button(button_frame, text="Uncross Item ", command=uncross_off)
 
-delete_button.grid(row=0, column=0)
-add_button.grid(row=0, column=1, padx=20)
+delete_button.grid(row=0, column=1, padx=20)
+add_button.grid(row=0, column=0, )
 cross_off_button.grid(row=0, column=2)
 uncross_off_button.grid(row=0, column=3, padx=20)
-
 
 
 
