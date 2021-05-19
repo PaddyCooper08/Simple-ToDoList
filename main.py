@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter.font import Font
 from tkinter import filedialog
 import pickle
-
+global globalfilename
 root = Tk()
 root.title('ToDo List')
 root.geometry("500x500")
@@ -66,15 +66,112 @@ button_frame = Frame(root)
 button_frame.pack(pady=20)
 
 #functions
+globalfilename = ""
 def delete_item(event):
 	my_list.delete(ANCHOR)
+	global globalfilename
+	if not globalfilename == "":
+		print('fail')
+		file_name = globalfilename
+		if file_name:
+			if file_name.endswith(".dat"):
+				pass
+			else:
+				file_name = f'{file_name}.dat'
+			#delete crossed items before saving
+			count = 0
+			while count < my_list.size():
+				if my_list.itemcget(count, "fg") == "#dedede":
+					my_list.delete(my_list.index(count))
+				else:
+					count += 1
+			#grab all the stuff from the list
+			stuff = my_list.get(0, END)
+
+
+			#open file
+			output_file = open(file_name, 'wb')
+
+			#actually add the stuff to the file
+			pickle.dump(stuff, output_file)
+		
+
+
+
+
+	else:
+		pass
 
 def delete_item_button():
 	my_list.delete(ANCHOR)
+	global globalfilename
+	if not globalfilename == "":
+		print('fail')
+		file_name = globalfilename
+		if file_name:
+			if file_name.endswith(".dat"):
+				pass
+			else:
+				file_name = f'{file_name}.dat'
+			#delete crossed items before saving
+			count = 0
+			while count < my_list.size():
+				if my_list.itemcget(count, "fg") == "#dedede":
+					my_list.delete(my_list.index(count))
+				else:
+					count += 1
+			#grab all the stuff from the list
+			stuff = my_list.get(0, END)
+
+
+			#open file
+			output_file = open(file_name, 'wb')
+
+			#actually add the stuff to the file
+			pickle.dump(stuff, output_file)
+		
+
+
+
+
+	else:
+		pass
 
 def add_item_button():
 	my_list.insert(END, my_entry.get())
 	my_entry.delete(0, END)
+	global globalfilename
+	if not globalfilename == "":
+		print('fail')
+		file_name = globalfilename
+		if file_name:
+			if file_name.endswith(".dat"):
+				pass
+			else:
+				file_name = f'{file_name}.dat'
+			#delete crossed items before saving
+			count = 0
+			while count < my_list.size():
+				if my_list.itemcget(count, "fg") == "#dedede":
+					my_list.delete(my_list.index(count))
+				else:
+					count += 1
+			#grab all the stuff from the list
+			stuff = my_list.get(0, END)
+
+
+			#open file
+			output_file = open(file_name, 'wb')
+
+			#actually add the stuff to the file
+			pickle.dump(stuff, output_file)
+		
+
+
+
+
+	else:
+		pass
 
 def cross_off_button():
 	my_list.itemconfig(
@@ -89,6 +186,38 @@ def uncross_off():
 		fg="#464646")	
 	#Get rid of selection bar
 	my_list.selection_clear(0, END)
+	global globalfilename
+	if not globalfilename == "":
+		print('fail')
+		file_name = globalfilename
+		if file_name:
+			if file_name.endswith(".dat"):
+				pass
+			else:
+				file_name = f'{file_name}.dat'
+			#delete crossed items before saving
+			count = 0
+			while count < my_list.size():
+				if my_list.itemcget(count, "fg") == "#dedede":
+					my_list.delete(my_list.index(count))
+				else:
+					count += 1
+			#grab all the stuff from the list
+			stuff = my_list.get(0, END)
+
+
+			#open file
+			output_file = open(file_name, 'wb')
+
+			#actually add the stuff to the file
+			pickle.dump(stuff, output_file)
+		
+
+
+
+
+		else:
+			pass
 
 def delete_crossed(event):
 	count = 0
@@ -97,6 +226,38 @@ def delete_crossed(event):
 			my_list.delete(my_list.index(count))
 		else:
 			count += 1
+		global globalfilename
+		if not globalfilename == "":
+			print('fail')
+			file_name = globalfilename
+			if file_name:
+				if file_name.endswith(".dat"):
+					pass
+				else:
+					file_name = f'{file_name}.dat'
+				#delete crossed items before saving
+				count = 0
+				while count < my_list.size():
+					if my_list.itemcget(count, "fg") == "#dedede":
+						my_list.delete(my_list.index(count))
+					else:
+						count += 1
+				#grab all the stuff from the list
+				stuff = my_list.get(0, END)
+
+
+				#open file
+				output_file = open(file_name, 'wb')
+
+				#actually add the stuff to the file
+				pickle.dump(stuff, output_file)
+			
+
+
+
+
+		else:
+			pass
 def cross_off(event):
 	my_list.itemconfig(
 		my_list.curselection(),
@@ -109,6 +270,38 @@ def add_item(event):
 	
 	if not len(entry_data) == 0:
 		add_item_button()
+		global globalfilename
+		if not globalfilename == "":
+			print('fail')
+			file_name = globalfilename
+			if file_name:
+				if file_name.endswith(".dat"):
+					pass
+				else:
+					file_name = f'{file_name}.dat'
+				#delete crossed items before saving
+				count = 0
+				while count < my_list.size():
+					if my_list.itemcget(count, "fg") == "#dedede":
+						my_list.delete(my_list.index(count))
+					else:
+						count += 1
+				#grab all the stuff from the list
+				stuff = my_list.get(0, END)
+
+
+				#open file
+				output_file = open(file_name, 'wb')
+
+				#actually add the stuff to the file
+				pickle.dump(stuff, output_file)
+			
+
+
+
+
+		else:
+			pass
 
 	else:
 		pass
@@ -119,89 +312,166 @@ def delete_crossed_button():
 			my_list.delete(my_list.index(count))
 		else:
 			count += 1
+		global globalfilename
+		if not globalfilename == "":
+			print('fail')
+			file_name = globalfilename
+			if file_name:
+				if file_name.endswith(".dat"):
+					pass
+				else:
+					file_name = f'{file_name}.dat'
+				#delete crossed items before saving
+				count = 0
+				while count < my_list.size():
+					if my_list.itemcget(count, "fg") == "#dedede":
+						my_list.delete(my_list.index(count))
+					else:
+						count += 1
+				#grab all the stuff from the list
+				stuff = my_list.get(0, END)
+
+
+				#open file
+				output_file = open(file_name, 'wb')
+
+				#actually add the stuff to the file
+				pickle.dump(stuff, output_file)
+			
+
+
+
+
+		else:
+			pass
 
 def save_list_button():
-	file_name = filedialog.asksaveasfilename(
-		initialdir = ("C:/Users/1210/OneDrive - RGS LPS/Documents/Frequent/Coding/ToDoList/Data"),
-		title="Save File",
-		filetypes=(("Dat Files", "*.dat",),
-					("All Files", "*.*"))
-		)
-	if file_name:
-		if file_name.endswith(".dat"):
-			pass
-		else:
-			file_name = f'{file_name}.dat'
-		#delete crossed items before saving
-		count = 0
-		while count < my_list.size():
-			if my_list.itemcget(count, "fg") == "#dedede":
-				my_list.delete(my_list.index(count))
+	global globalfilename
+	if not globalfilename == "":
+		print('fail')
+		file_name = globalfilename
+		if file_name:
+			if file_name.endswith(".dat"):
+				pass
 			else:
-				count += 1
-		#grab all the stuff from the list
-		stuff = my_list.get(0, END)
+				file_name = f'{file_name}.dat'
+			#delete crossed items before saving
+			count = 0
+			while count < my_list.size():
+				if my_list.itemcget(count, "fg") == "#dedede":
+					my_list.delete(my_list.index(count))
+				else:
+					count += 1
+			#grab all the stuff from the list
+			stuff = my_list.get(0, END)
 
 
-		#open file
-		output_file = open(file_name, 'wb')
+			#open file
+			output_file = open(file_name, 'wb')
 
-		#actually add the stuff to the file
-		pickle.dump(stuff, output_file)
+			#actually add the stuff to the file
+			pickle.dump(stuff, output_file)
+		
+
+
+
+
+	else:
+		file_name = filedialog.asksaveasfilename(
+			initialdir = ("C:/Users/1210/OneDrive - RGS LPS/Documents/Frequent/Coding/ToDoList/Data"),
+			title="Save File",
+			filetypes=(("Dat Files", "*.dat",),
+						("All Files", "*.*"))
+			)
+		if file_name:
+			if file_name.endswith(".dat"):
+				pass
+			else:
+				file_name = f'{file_name}.dat'
+			#delete crossed items before saving
+			count = 0
+			while count < my_list.size():
+				if my_list.itemcget(count, "fg") == "#dedede":
+					my_list.delete(my_list.index(count))
+				else:
+					count += 1
+			#grab all the stuff from the list
+			stuff = my_list.get(0, END)
+
+
+			#open file
+			output_file = open(file_name, 'wb')
+
+			#actually add the stuff to the file
+			pickle.dump(stuff, output_file)
+			 
+			
+			globalfilename = file_name
+	
 
 def save_list(event):
-	file_name = filedialog.asksaveasfilename(
-		initialdir = ("C:/Users/1210/OneDrive - RGS LPS/Documents/Frequent/Coding/ToDoList/Data"),
-		title="Save File",
-		filetypes=(("Dat Files", "*.dat",),
-					("All Files", "*.*"))
-		)
-	if file_name:
-		if file_name.endswith(".dat"):
-			pass
-		else:
-			file_name = f'{file_name}.dat'
-		#delete crossed items before saving
-		count = 0
-		while count < my_list.size():
-			if my_list.itemcget(count, "fg") == "#dedede":
-				my_list.delete(my_list.index(count))
+	global globalfilename
+	if not globalfilename:
+		file_name = globalfilename
+		if file_name:
+			if file_name.endswith(".dat"):
+				pass
 			else:
-				count += 1
-		#grab all the stuff from the list
-		stuff = my_list.get(0, END)
+				file_name = f'{file_name}.dat'
+			#delete crossed items before saving
+			count = 0
+			while count < my_list.size():
+				if my_list.itemcget(count, "fg") == "#dedede":
+					my_list.delete(my_list.index(count))
+				else:
+					count += 1
+			#grab all the stuff from the list
+			stuff = my_list.get(0, END)
 
 
-		#open file
-		output_file = open(file_name, 'wb')
+			#open file
+			output_file = open(file_name, 'wb')
 
-		#actually add the stuff to the file
-		pickle.dump(stuff, output_file)
-
-def save_list_revision(event):
-	file_name = ("C:/Users/1210/OneDrive - RGS LPS/Documents/Frequent/Coding/ToDoList/Data/revision.dat")
+			#actually add the stuff to the file
+			pickle.dump(stuff, output_file)
 		
-	if file_name:
-		if file_name.endswith(".dat"):
-			pass
-		else:
-			file_name = f'{file_name}.dat'
-		#delete crossed items before saving
-		count = 0
-		while count < my_list.size():
-			if my_list.itemcget(count, "fg") == "#dedede":
-				my_list.delete(my_list.index(count))
+
+
+
+
+	else:
+		file_name = filedialog.asksaveasfilename(
+			initialdir = ("C:/Users/1210/OneDrive - RGS LPS/Documents/Frequent/Coding/ToDoList/Data"),
+			title="Save File",
+			filetypes=(("Dat Files", "*.dat",),
+						("All Files", "*.*"))
+			)
+		if file_name:
+			if file_name.endswith(".dat"):
+				pass
 			else:
-				count += 1
-		#grab all the stuff from the list
-		stuff = my_list.get(0, END)
+				file_name = f'{file_name}.dat'
+			#delete crossed items before saving
+			count = 0
+			while count < my_list.size():
+				if my_list.itemcget(count, "fg") == "#dedede":
+					my_list.delete(my_list.index(count))
+				else:
+					count += 1
+			#grab all the stuff from the list
+			stuff = my_list.get(0, END)
 
 
-		#open file
-		output_file = open(file_name, 'wb')
+			#open file
+			output_file = open(file_name, 'wb')
 
-		#actually add the stuff to the file
-		pickle.dump(stuff, output_file)
+			#actually add the stuff to the file
+			pickle.dump(stuff, output_file)
+			 
+
+			globalfilename = file_name
+
+
 
 
 
@@ -233,25 +503,8 @@ def open_list(event):
 
 		for item in stuff:
 			my_list.insert(END, item)
-def open_list_revision(event):
-	file_name = ("C:/Users/1210/OneDrive - RGS LPS/Documents/Frequent/Coding/ToDoList/Data/revision.dat")
-		
-
-	if file_name:
-		#delete current list
-		my_list.delete(0, END)
 
 
-		#open file
-		input_file = open(file_name, 'rb')
-
-		#load data
-		stuff = pickle.load(input_file)
-
-		#output data to the sreen
-
-		for item in stuff:
-			my_list.insert(END, item)
 
 def open_list_button():
 	file_name = filedialog.askopenfilename(	initialdir = ("C:/Users/1210/OneDrive - RGS LPS/Documents/Frequent/Coding/ToDoList/Data"),
@@ -277,7 +530,39 @@ def open_list_button():
 
 def clear_list():
 	my_list.delete(0, END)
-	
+	global globalfilename
+	if not globalfilename == "":
+		print('fail')
+		file_name = globalfilename
+		if file_name:
+			if file_name.endswith(".dat"):
+				pass
+			else:
+				file_name = f'{file_name}.dat'
+			#delete crossed items before saving
+			count = 0
+			while count < my_list.size():
+				if my_list.itemcget(count, "fg") == "#dedede":
+					my_list.delete(my_list.index(count))
+				else:
+					count += 1
+			#grab all the stuff from the list
+			stuff = my_list.get(0, END)
+
+
+			#open file
+			output_file = open(file_name, 'wb')
+
+			#actually add the stuff to the file
+			pickle.dump(stuff, output_file)
+		
+
+
+
+
+	else:
+		pass
+
 #Create Menu
 my_menu = Menu(root)
 root.config(menu=my_menu)
@@ -304,9 +589,9 @@ root.bind('<BackSpace>', delete_item)
 root.bind('<Shift_L>', cross_off)
 root.bind('<Delete>', delete_crossed)
 root.bind('<Control-o>', open_list)
-root.bind('<Control-s>', save_list_revision)
+
 root.bind('<Control-Shift-S>', save_list)
-root.bind('<Control-p>', open_list_revision)
+
 
 
 
