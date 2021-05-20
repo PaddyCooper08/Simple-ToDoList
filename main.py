@@ -599,9 +599,9 @@ file_menu.add_command(label="Clear List", command=clear_list)
 
 #Keybinds
 root.bind('<Return>', add_item)
-root.bind('<BackSpace>', delete_item)
+
 #root.bind('<Backslash>', cross_off)
-root.bind('<Delete>', delete_crossed)
+root.bind('<Delete>', delete_item)
 root.bind('<Control-o>', open_list)
 
 root.bind('<Control-Shift-S>', save_list)
@@ -637,15 +637,10 @@ crossbtn = cross.subsample(3, 3)
 #add buttons
 delete_button = Button(button_frame, text="Delete Item", command=delete_item_button, image=crossbtn, compound=LEFT, )
 add_button = Button(button_frame, text="Add Item", command=add_item_button, image=plusbtn, compound=LEFT )
-cross_off_button = Button(button_frame, text="Cross Item", command=cross_off_button)
-uncross_off_button = Button(button_frame, text="Uncross Item ", command=uncross_off)
-delete_crossed_button = Button(button_frame, text="Delete Crossed ", command=delete_crossed_button)
+
 
 delete_button.grid(row=0, column=1, padx=12)
 add_button.grid(row=0, column=0, )
-cross_off_button.grid(row=0, column=2)
-uncross_off_button.grid(row=0, column=3, padx=12)
-delete_crossed_button.grid(row=0, column=4, )
 
 
 
