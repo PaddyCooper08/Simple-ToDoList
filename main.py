@@ -3,9 +3,17 @@ from tkinter.font import Font
 from tkinter import filedialog
 import pickle
 global globalfilename
+import os
+from tkinter.ttk import *
+
+curr_dir = os.getcwd()
+
 root = Tk()
 root.title('ToDo List')
-root.geometry("500x500")
+root.geometry("490x440")
+bg = PhotoImage(file = os.path.join(curr_dir, "data", "bg.png"))
+label1 = Label( root, image = bg)
+label1.place(x = 0, y = 0)
 
 #Define font
 my_font = Font(
@@ -21,9 +29,9 @@ my_list = Listbox(my_frame,
 	font=my_font,
 	width=30,
 	height=5,
-	bg="SystemButtonFace",
+	bg="#8733FF",
 	bd=0,
-	fg="#464646",
+	fg="#00FFFF",
 	highlightthickness=0,
 	selectbackground="#a6a6a6",
 	activestyle="none",
@@ -81,7 +89,7 @@ def delete_item(event):
 			#delete crossed items before saving
 			count = 0
 			while count < my_list.size():
-				if my_list.itemcget(count, "fg") == "#dedede":
+				if my_list.itemcget(count, "fg") == "#A48CC6 ":
 					my_list.delete(my_list.index(count))
 				else:
 					count += 1
@@ -116,7 +124,7 @@ def delete_item_button():
 			#delete crossed items before saving
 			count = 0
 			while count < my_list.size():
-				if my_list.itemcget(count, "fg") == "#dedede":
+				if my_list.itemcget(count, "fg") == "#A48CC6 ":
 					my_list.delete(my_list.index(count))
 				else:
 					count += 1
@@ -149,10 +157,10 @@ def add_item_button():
 				pass
 			else:
 				file_name = f'{file_name}.dat'
-			#delete crossed items before saving
+			#delete ed items before saving
 			count = 0
 			while count < my_list.size():
-				if my_list.itemcget(count, "fg") == "#dedede":
+				if my_list.itemcget(count, "fg") == "#A48CC6 ":
 					my_list.delete(my_list.index(count))
 				else:
 					count += 1
@@ -176,7 +184,7 @@ def add_item_button():
 def cross_off_button():
 	my_list.itemconfig(
 		my_list.curselection(),
-		fg="#dedede")	
+		fg="#A48CC6")	
 	#Get rid of selection bar
 	my_list.selection_clear(0, END)
 		
@@ -198,7 +206,7 @@ def uncross_off():
 			#delete crossed items before saving
 			count = 0
 			while count < my_list.size():
-				if my_list.itemcget(count, "fg") == "#dedede":
+				if my_list.itemcget(count, "fg") == "#A48CC6":
 					my_list.delete(my_list.index(count))
 				else:
 					count += 1
@@ -222,7 +230,7 @@ def uncross_off():
 def delete_crossed(event):
 	count = 0
 	while count < my_list.size():
-		if my_list.itemcget(count, "fg") == "#dedede":
+		if my_list.itemcget(count, "fg") == "#A48CC6":
 			my_list.delete(my_list.index(count))
 		else:
 			count += 1
@@ -238,7 +246,7 @@ def delete_crossed(event):
 				#delete crossed items before saving
 				count = 0
 				while count < my_list.size():
-					if my_list.itemcget(count, "fg") == "#dedede":
+					if my_list.itemcget(count, "fg") == "#A48CC6":
 						my_list.delete(my_list.index(count))
 					else:
 						count += 1
@@ -261,7 +269,7 @@ def delete_crossed(event):
 def cross_off(event):
 	my_list.itemconfig(
 		my_list.curselection(),
-		fg="#dedede")	
+		fg="#d3d3d3")	
 	#Get rid of selection bar
 	my_list.selection_clear(0, END)
 
@@ -282,7 +290,7 @@ def add_item(event):
 				#delete crossed items before saving
 				count = 0
 				while count < my_list.size():
-					if my_list.itemcget(count, "fg") == "#dedede":
+					if my_list.itemcget(count, "fg") == "#A48CC6":
 						my_list.delete(my_list.index(count))
 					else:
 						count += 1
@@ -308,7 +316,7 @@ def add_item(event):
 def delete_crossed_button():
 	count = 0
 	while count < my_list.size():
-		if my_list.itemcget(count, "fg") == "#dedede":
+		if my_list.itemcget(count, "fg") == "#A48CC6":
 			my_list.delete(my_list.index(count))
 		else:
 			count += 1
@@ -324,7 +332,7 @@ def delete_crossed_button():
 				#delete crossed items before saving
 				count = 0
 				while count < my_list.size():
-					if my_list.itemcget(count, "fg") == "#dedede":
+					if my_list.itemcget(count, "fg") == "#A48CC6":
 						my_list.delete(my_list.index(count))
 					else:
 						count += 1
@@ -358,7 +366,7 @@ def save_list_button():
 			#delete crossed items before saving
 			count = 0
 			while count < my_list.size():
-				if my_list.itemcget(count, "fg") == "#dedede":
+				if my_list.itemcget(count, "fg") == "#A48CC6":
 					my_list.delete(my_list.index(count))
 				else:
 					count += 1
@@ -378,7 +386,7 @@ def save_list_button():
 
 	else:
 		file_name = filedialog.asksaveasfilename(
-			initialdir = ("C:/Users/1210/OneDrive - RGS LPS/Documents/Frequent/Coding/ToDoList/Data"),
+			initialdir = (os.path.join(curr_dir, "/data")),
 			title="Save File",
 			filetypes=(("Dat Files", "*.dat",),
 						("All Files", "*.*"))
@@ -391,7 +399,7 @@ def save_list_button():
 			#delete crossed items before saving
 			count = 0
 			while count < my_list.size():
-				if my_list.itemcget(count, "fg") == "#dedede":
+				if my_list.itemcget(count, "fg") == "#A48CC6":
 					my_list.delete(my_list.index(count))
 				else:
 					count += 1
@@ -421,7 +429,7 @@ def save_list(event):
 			#delete crossed items before saving
 			count = 0
 			while count < my_list.size():
-				if my_list.itemcget(count, "fg") == "#dedede":
+				if my_list.itemcget(count, "fg") == "#A48CC6":
 					my_list.delete(my_list.index(count))
 				else:
 					count += 1
@@ -441,7 +449,7 @@ def save_list(event):
 
 	else:
 		file_name = filedialog.asksaveasfilename(
-			initialdir = ("C:/Users/1210/OneDrive - RGS LPS/Documents/Frequent/Coding/ToDoList/Data"),
+			initialdir = (os.path.join(curr_dir, "/data")),
 			title="Save File",
 			filetypes=(("Dat Files", "*.dat",),
 						("All Files", "*.*"))
@@ -454,7 +462,7 @@ def save_list(event):
 			#delete crossed items before saving
 			count = 0
 			while count < my_list.size():
-				if my_list.itemcget(count, "fg") == "#dedede":
+				if my_list.itemcget(count, "fg") == "#A48CC6":
 					my_list.delete(my_list.index(count))
 				else:
 					count += 1
@@ -483,7 +491,7 @@ def save_list(event):
 	
 
 def open_list(event):
-	file_name = filedialog.askopenfilename(	initialdir = ("C:/Users/1210/OneDrive - RGS LPS/Documents/Frequent/Coding/ToDoList/Data"),
+	file_name = filedialog.askopenfilename(	initialdir = (os.path.join(curr_dir, "/data")),
 		title="Save File",
 		filetypes=(("Dat Files", "*.dat",),
 					("All Files", "*.*")))
@@ -503,11 +511,14 @@ def open_list(event):
 
 		for item in stuff:
 			my_list.insert(END, item)
+
+		global globalfilename
+		globalfilename = file_name
 
 
 
 def open_list_button():
-	file_name = filedialog.askopenfilename(	initialdir = ("C:/Users/1210/OneDrive - RGS LPS/Documents/Frequent/Coding/ToDoList/Data"),
+	file_name = filedialog.askopenfilename(	initialdir = (os.path.join(curr_dir, "/data")),
 		title="Save File",
 		filetypes=(("Dat Files", "*.dat",),
 					("All Files", "*.*")))
@@ -527,6 +538,9 @@ def open_list_button():
 
 		for item in stuff:
 			my_list.insert(END, item)
+
+		global globalfilename
+		globalfilename = file_name
 
 def clear_list():
 	my_list.delete(0, END)
@@ -542,7 +556,7 @@ def clear_list():
 			#delete crossed items before saving
 			count = 0
 			while count < my_list.size():
-				if my_list.itemcget(count, "fg") == "#dedede":
+				if my_list.itemcget(count, "fg") == "#A48CC6":
 					my_list.delete(my_list.index(count))
 				else:
 					count += 1
@@ -586,7 +600,7 @@ file_menu.add_command(label="Clear List", command=clear_list)
 #Keybinds
 root.bind('<Return>', add_item)
 root.bind('<BackSpace>', delete_item)
-root.bind('<Shift_L>', cross_off)
+#root.bind('<Backslash>', cross_off)
 root.bind('<Delete>', delete_crossed)
 root.bind('<Control-o>', open_list)
 
@@ -600,7 +614,17 @@ root.bind('<Control-Shift-S>', save_list)
 	
 
 
+#button styling
+style = Style()
+style.configure('W.TButton', font =
+               ('calibri', 10),
+                foreground = 'red', background='00FFFF')
 
+photo = PhotoImage(file = os.path.join(curr_dir, "data", "btn.png"))
+plus = PhotoImage(file = os.path.join(curr_dir, "data", "plusbtn.png"))
+cross = PhotoImage(file = os.path.join(curr_dir, "data", "redbtn.png"))
+plusbtn = plus.subsample(3, 3)
+crossbtn = cross.subsample(3, 3)
    
 	
 
@@ -611,16 +635,16 @@ root.bind('<Control-Shift-S>', save_list)
 
 
 #add buttons
-delete_button = Button(button_frame, text="Delete Item", command=delete_item_button)
-add_button = Button(button_frame, text="Add Item", command=add_item_button)
+delete_button = Button(button_frame, text="Delete Item", command=delete_item_button, image=crossbtn, compound=LEFT, )
+add_button = Button(button_frame, text="Add Item", command=add_item_button, image=plusbtn, compound=LEFT )
 cross_off_button = Button(button_frame, text="Cross Item", command=cross_off_button)
 uncross_off_button = Button(button_frame, text="Uncross Item ", command=uncross_off)
 delete_crossed_button = Button(button_frame, text="Delete Crossed ", command=delete_crossed_button)
 
-delete_button.grid(row=0, column=1, padx=20)
+delete_button.grid(row=0, column=1, padx=12)
 add_button.grid(row=0, column=0, )
 cross_off_button.grid(row=0, column=2)
-uncross_off_button.grid(row=0, column=3, padx=20)
+uncross_off_button.grid(row=0, column=3, padx=12)
 delete_crossed_button.grid(row=0, column=4, )
 
 
