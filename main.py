@@ -5,12 +5,14 @@ import pickle
 global globalfilename
 import os
 from tkinter.ttk import *
+from tkinter.messagebox import showinfo
 
 curr_dir = os.getcwd()
 
 root = Tk()
 root.title('ToDo List')
 root.geometry("490x440")
+root.iconbitmap(os.path.join(curr_dir, 'data', 'logo.ico'))
 bg = PhotoImage(file = os.path.join(curr_dir, "data", "bg.png"))
 label1 = Label( root, image = bg)
 label1.place(x = 0, y = 0)
@@ -75,8 +77,7 @@ button_frame.pack(pady=20)
 
 #functions
 globalfilename = ""
-def delete_item(event):
-	my_list.delete(ANCHOR)
+def autosave():
 	global globalfilename
 	if not globalfilename == "":
 		print('fail')
@@ -87,12 +88,7 @@ def delete_item(event):
 			else:
 				file_name = f'{file_name}.dat'
 			#delete crossed items before saving
-			count = 0
-			while count < my_list.size():
-				if my_list.itemcget(count, "fg") == "#A48CC6 ":
-					my_list.delete(my_list.index(count))
-				else:
-					count += 1
+			
 			#grab all the stuff from the list
 			stuff = my_list.get(0, END)
 
@@ -109,249 +105,58 @@ def delete_item(event):
 
 	else:
 		pass
+
+
+
+
+
+def delete_item(event):
+	my_list.delete(ANCHOR)
+	autosave()
+	
+		
+
+
+
+
 
 def delete_item_button():
 	my_list.delete(ANCHOR)
-	global globalfilename
-	if not globalfilename == "":
-		print('fail')
-		file_name = globalfilename
-		if file_name:
-			if file_name.endswith(".dat"):
-				pass
-			else:
-				file_name = f'{file_name}.dat'
-			#delete crossed items before saving
-			count = 0
-			while count < my_list.size():
-				if my_list.itemcget(count, "fg") == "#A48CC6 ":
-					my_list.delete(my_list.index(count))
-				else:
-					count += 1
-			#grab all the stuff from the list
-			stuff = my_list.get(0, END)
+	autosave()
 
-
-			#open file
-			output_file = open(file_name, 'wb')
-
-			#actually add the stuff to the file
-			pickle.dump(stuff, output_file)
 		
 
 
 
 
-	else:
-		pass
+	
 
 def add_item_button():
 	my_list.insert(END, my_entry.get())
 	my_entry.delete(0, END)
-	global globalfilename
-	if not globalfilename == "":
-		print('fail')
-		file_name = globalfilename
-		if file_name:
-			if file_name.endswith(".dat"):
-				pass
-			else:
-				file_name = f'{file_name}.dat'
-			#delete ed items before saving
-			count = 0
-			while count < my_list.size():
-				if my_list.itemcget(count, "fg") == "#A48CC6 ":
-					my_list.delete(my_list.index(count))
-				else:
-					count += 1
-			#grab all the stuff from the list
-			stuff = my_list.get(0, END)
+	autosave()
 
 
-			#open file
-			output_file = open(file_name, 'wb')
-
-			#actually add the stuff to the file
-			pickle.dump(stuff, output_file)
 		
 
 
 
 
-	else:
-		pass
-
-def cross_off_button():
-	my_list.itemconfig(
-		my_list.curselection(),
-		fg="#A48CC6")	
-	#Get rid of selection bar
-	my_list.selection_clear(0, END)
-		
-def uncross_off():
-	my_list.itemconfig(
-		my_list.curselection(),
-		fg="#464646")	
-	#Get rid of selection bar
-	my_list.selection_clear(0, END)
-	global globalfilename
-	if not globalfilename == "":
-		print('fail')
-		file_name = globalfilename
-		if file_name:
-			if file_name.endswith(".dat"):
-				pass
-			else:
-				file_name = f'{file_name}.dat'
-			#delete crossed items before saving
-			count = 0
-			while count < my_list.size():
-				if my_list.itemcget(count, "fg") == "#A48CC6":
-					my_list.delete(my_list.index(count))
-				else:
-					count += 1
-			#grab all the stuff from the list
-			stuff = my_list.get(0, END)
-
-
-			#open file
-			output_file = open(file_name, 'wb')
-
-			#actually add the stuff to the file
-			pickle.dump(stuff, output_file)
 		
 
 
-
-
-		else:
-			pass
-
-def delete_crossed(event):
-	count = 0
-	while count < my_list.size():
-		if my_list.itemcget(count, "fg") == "#A48CC6":
-			my_list.delete(my_list.index(count))
-		else:
-			count += 1
-		global globalfilename
-		if not globalfilename == "":
-			print('fail')
-			file_name = globalfilename
-			if file_name:
-				if file_name.endswith(".dat"):
-					pass
-				else:
-					file_name = f'{file_name}.dat'
-				#delete crossed items before saving
-				count = 0
-				while count < my_list.size():
-					if my_list.itemcget(count, "fg") == "#A48CC6":
-						my_list.delete(my_list.index(count))
-					else:
-						count += 1
-				#grab all the stuff from the list
-				stuff = my_list.get(0, END)
-
-
-				#open file
-				output_file = open(file_name, 'wb')
-
-				#actually add the stuff to the file
-				pickle.dump(stuff, output_file)
-			
-
-
-
-
-		else:
-			pass
-def cross_off(event):
-	my_list.itemconfig(
-		my_list.curselection(),
-		fg="#d3d3d3")	
-	#Get rid of selection bar
-	my_list.selection_clear(0, END)
 
 def add_item(event):
 	entry_data = (my_entry.get())
 	
 	if not len(entry_data) == 0:
 		add_item_button()
-		global globalfilename
-		if not globalfilename == "":
-			print('fail')
-			file_name = globalfilename
-			if file_name:
-				if file_name.endswith(".dat"):
-					pass
-				else:
-					file_name = f'{file_name}.dat'
-				#delete crossed items before saving
-				count = 0
-				while count < my_list.size():
-					if my_list.itemcget(count, "fg") == "#A48CC6":
-						my_list.delete(my_list.index(count))
-					else:
-						count += 1
-				#grab all the stuff from the list
-				stuff = my_list.get(0, END)
-
-
-				#open file
-				output_file = open(file_name, 'wb')
-
-				#actually add the stuff to the file
-				pickle.dump(stuff, output_file)
-			
-
-
-
-
-		else:
-			pass
+		autosave()
+		
 
 	else:
 		pass
-def delete_crossed_button():
-	count = 0
-	while count < my_list.size():
-		if my_list.itemcget(count, "fg") == "#A48CC6":
-			my_list.delete(my_list.index(count))
-		else:
-			count += 1
-		global globalfilename
-		if not globalfilename == "":
-			print('fail')
-			file_name = globalfilename
-			if file_name:
-				if file_name.endswith(".dat"):
-					pass
-				else:
-					file_name = f'{file_name}.dat'
-				#delete crossed items before saving
-				count = 0
-				while count < my_list.size():
-					if my_list.itemcget(count, "fg") == "#A48CC6":
-						my_list.delete(my_list.index(count))
-					else:
-						count += 1
-				#grab all the stuff from the list
-				stuff = my_list.get(0, END)
 
-
-				#open file
-				output_file = open(file_name, 'wb')
-
-				#actually add the stuff to the file
-				pickle.dump(stuff, output_file)
-			
-
-
-
-
-		else:
-			pass
 
 def save_list_button():
 	global globalfilename
@@ -544,43 +349,26 @@ def open_list_button():
 
 def clear_list():
 	my_list.delete(0, END)
-	global globalfilename
-	if not globalfilename == "":
-		print('fail')
-		file_name = globalfilename
-		if file_name:
-			if file_name.endswith(".dat"):
-				pass
-			else:
-				file_name = f'{file_name}.dat'
-			#delete crossed items before saving
-			count = 0
-			while count < my_list.size():
-				if my_list.itemcget(count, "fg") == "#A48CC6":
-					my_list.delete(my_list.index(count))
-				else:
-					count += 1
-			#grab all the stuff from the list
-			stuff = my_list.get(0, END)
+	autosave()
 
-
-			#open file
-			output_file = open(file_name, 'wb')
-
-			#actually add the stuff to the file
-			pickle.dump(stuff, output_file)
-		
-
-
-
-
-	else:
-		pass
 
 #Create Menu
 my_menu = Menu(root)
 root.config(menu=my_menu)
+ #popup
 
+def popup_window():
+    window = Toplevel()
+    window.title('Keybinds')
+
+    label = Label(window, text="Delete current item : del\nSave as : ctrl+shift+s\nAdd item : enter " )
+    label.pack(fill='x', padx=100, pady=150)
+
+    button_close = Button(window, text="Close", command=window.destroy)
+    button_close.pack(fill='x')
+
+def popup_showinfo():
+    showinfo("ShowInfo", "Hello World!")
 
 #ad items to menu
 file_menu = Menu(my_menu, tearoff=False)
@@ -590,6 +378,9 @@ file_menu.add_command(label="Save List", command=save_list_button)
 file_menu.add_command(label="Open List", command=open_list_button)
 file_menu.add_separator()
 file_menu.add_command(label="Clear List", command=clear_list)
+file_menu.add_separator()
+file_menu.add_command(label="Keybinds", command=popup_window)
+
 
 
 	
@@ -629,7 +420,7 @@ crossbtn = cross.subsample(3, 3)
 	
 
 
-   
+
 
 
 
@@ -639,8 +430,9 @@ delete_button = Button(button_frame, text="Delete Item", command=delete_item_but
 add_button = Button(button_frame, text="Add Item", command=add_item_button, image=plusbtn, compound=LEFT )
 
 
-delete_button.grid(row=0, column=1, padx=12)
-add_button.grid(row=0, column=0, )
+
+delete_button.grid(row=0, column=1, )
+add_button.grid(row=0, column=0,)
 
 
 
